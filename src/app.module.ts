@@ -4,10 +4,12 @@ import { AppService } from './app.service';
 import { ClientSchedulerModule } from './client-scheduler/client-scheduler.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
+import { AdminDomainModule } from './admin-domain/admin-domain.module';
+import { ContactModule } from './contact/contact.module';
 
 
 @Module({
-  imports: [ClientSchedulerModule, TypeOrmModule.forRoot()],
+  imports: [ TypeOrmModule.forRoot(), ClientSchedulerModule, AdminDomainModule, ContactModule],
   controllers: [AppController],
   providers: [AppService],
 })
