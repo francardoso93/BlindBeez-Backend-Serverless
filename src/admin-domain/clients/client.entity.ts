@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import { Company } from '../companies/company.entity';
 
 @Entity()
@@ -8,11 +8,16 @@ export class Client {
 
     @Column()
     name: string;
-    
+
     @Column()
     email: string;
-    
-    // @OneToOne(type => Company)
-    // @JoinColumn()
-    // company: Company;  
+
+    //****/
+
+    // TypeORM Relations. TODO: Arrumar!
+    // https://github.com/typeorm/typeorm/blob/master/docs/relations.md
+
+    @ManyToOne(type => Company, Company => Company.clients)
+    company: Company;
+
 }

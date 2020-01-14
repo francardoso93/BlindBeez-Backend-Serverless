@@ -20,17 +20,17 @@ export class Schedule {
     // https://github.com/typeorm/typeorm/blob/master/docs/relations.md
     
     
-    // @OneToOne(type => Massotherapist)
-    // @JoinColumn()
-    // massotherapist: Massotherapist;
+    @OneToOne(type => Massotherapist)
+    @JoinColumn()
+    massotherapist: Massotherapist;
     
-    // @OneToOne(type => Company)
-    // @JoinColumn()
-    // company: Company;      
+    @OneToOne(type => Company)
+    @JoinColumn()
+    company: Company;      
     
-    // @OneToOne(type => Client)
-    // @JoinColumn()
-    // client: Client;
+    @OneToOne(type => Client)
+    @JoinColumn()
+    client: Client;
 
     @Column()
     reserved: boolean;
