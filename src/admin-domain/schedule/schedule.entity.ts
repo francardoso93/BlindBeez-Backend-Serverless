@@ -14,12 +14,7 @@ export class Schedule {
 
     @Column()
     time: string;
-    //****/
-    
-    // TypeORM Relations. TODO: Arrumar!
-    // https://github.com/typeorm/typeorm/blob/master/docs/relations.md
-    
-    
+  
     @OneToOne(type => Massotherapist)
     @JoinColumn()
     massotherapist: Massotherapist;
