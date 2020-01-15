@@ -6,7 +6,7 @@ import { Client } from '../clients/client.entity';
 @Entity()
 export class Schedule {
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     //TODO: Reflexão: duas colunas separadas mesmo ou datetime? ****
     @Column()

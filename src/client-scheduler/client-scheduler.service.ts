@@ -1,24 +1,51 @@
-// import { Injectable } from '@nestjs/common';
-// import { ClientSchedulerDto } from './client-scheduler.dto';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { ClientSchedulerDto } from './client-scheduler.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Client } from '../admin-domain/clients/client.entity';
+import { Schedule } from '../admin-domain/schedule/schedule.entity';
 
-// @Injectable()
-// export class ClientSchedulerService {
-//     constructor(
-//         @InjectRepository(ClientScheduler)
-//         private readonly clientRepository: Repository<ClientScheduler>,
-//     ) { }
+@Injectable()
+export class ClientSchedulerService {
+    constructor(
+        @InjectRepository(Client)
+        private readonly clientRepository: Repository<Client>,
+        @InjectRepository(Schedule)
+        private readonly scheduleRepository: Repository<Schedule>,
+    ) { }
 
-//     async findAll(): Promise<ClientScheduler[]> {
-//         return this.clientRepository.find();
-//     }
+    public async save(clientScheduler: ClientSchedulerDto): Promise<ClientSchedulerDto> {
+        try {
+            var client: Client = {
+                id: 0,
+                name: clientScheduler.name,
+                email: clientScheduler.email,
+                company: clientScheduler.company,
+            };
+            client = await this.clientRepository.save(client);
 
-//     public async save(clientScheduler: ClientScheduler): Promise<ClientScheduler>  {
-//         return this.clientRepository.save(clientScheduler);
-//     }
+            var schedule: Schedule = { //TODO: Para só atualizar a schedule, talvez faça sentido a chave ser composta de outros elementos, e não o ID em si
+                id: 0,                
+                client: client,
+                company: clientScheduler.company,
+                date: clientScheduler.date,
+                massotherapist: clientScheduler.massotherapist,
+                reserved: true,
+                time: clientScheduler.time,
+            }
+            this.scheduleRepository.save(schedule);
 
-//     public async read(id: number): Promise<ClientScheduler> {
-//         return this.clientRepository.findOne(id);
-//     }
-// }
+            return clientScheduler;
+        }
+        catch (ex) {
+            console.error(ex);
+            throw ex;
+        }
+    }
+    // async findAll(): Promise<ClientScheduler[]> {
+    //     return this.clientRepository.find();
+    // }
+    // public async read(id: number): Promise<ClientScheduler> {
+    //     return this.clientRepository.findOne(id);
+    // }
+}

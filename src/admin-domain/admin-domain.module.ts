@@ -12,5 +12,6 @@ import { Schedule } from './schedule/schedule.entity';
 @Module({
   imports:[TypeOrmModule.forFeature([Client, Company, Massotherapist, Schedule])],
   controllers: [CompaniesController, ScheduleController, MassotherapistsController, ClientsController],
+  exports: [TypeOrmModule],
 })
 export class AdminDomainModule {}
