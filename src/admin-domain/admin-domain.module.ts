@@ -8,10 +8,12 @@ import { Client } from './clients/client.entity';
 import { Company } from './companies/company.entity';
 import { Massotherapist } from './massotherapists/massotherapist.entity';
 import { Schedule } from './schedule/schedule.entity';
+import { CompaniesService } from './companies/companies.service';
 
 @Module({
   imports:[TypeOrmModule.forFeature([Client, Company, Massotherapist, Schedule])],
   controllers: [CompaniesController, ScheduleController, MassotherapistsController, ClientsController],
   exports: [TypeOrmModule],
+  providers: [CompaniesService],
 })
 export class AdminDomainModule {}
