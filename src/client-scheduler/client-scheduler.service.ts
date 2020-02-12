@@ -15,6 +15,7 @@ export class ClientSchedulerService {
     ) { }
 
     public async save(clientScheduler: ClientSchedulerDto): Promise<ClientSchedulerDto> {
+        // TODO: Transacionar?
         try {
             var client: Client = {
                 id: 0,
@@ -24,7 +25,7 @@ export class ClientSchedulerService {
             };
             client = await this.clientRepository.save(client);
 
-            var schedule: Schedule = { //TODO: Para só atualizar a schedule, talvez faça sentido a chave ser composta de outros elementos, e não o ID em si
+            var schedule: Schedule = {
                 id: 0,                
                 client: client,
                 company: clientScheduler.company,

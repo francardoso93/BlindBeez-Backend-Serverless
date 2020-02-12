@@ -14,15 +14,15 @@ export class Schedule {
 
     @Column()
     time: string;
-  
+
     @OneToOne(type => Massotherapist)
     @JoinColumn()
     massotherapist: Massotherapist;
-    
+
     @OneToOne(type => Company)
     @JoinColumn()
-    company: Company;      
-    
+    company: Company;
+
     @OneToOne(type => Client)
     @JoinColumn()
     client: Client;

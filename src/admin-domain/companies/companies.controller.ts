@@ -5,10 +5,10 @@ import { CompaniesService } from './companies.service';
 @Controller('companies')
 export class CompaniesController {
     constructor(
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
     ) { }
 
-    //TODO: Pipe validação de entrada
+    // TODO: Pipe validação de entrada
     @Post()
     @HttpCode(201)
     async post(@Body() body: Company) {
@@ -26,13 +26,13 @@ export class CompaniesController {
     @Get(":id")
     @HttpCode(200)
     async get(@Param() params) {
-        return await this.companiesService.get(params.id);            
+        return await this.companiesService.get(params.id);
     }
 
     @Put(":id")
     @HttpCode(200)
     async put(@Param() params, @Body() body: Company) {
-        return await this.companiesService.update(params.id, body);        
+        return await this.companiesService.update(params.id, body);
     }
 
     @Delete(":id")
