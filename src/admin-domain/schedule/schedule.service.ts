@@ -7,17 +7,25 @@ import { Repository, DeleteResult } from "typeorm";
 export class ScheduleService {
   constructor(
     @InjectRepository(Schedule)
-    private readonly scheduleRepository: Repository<Schedule>,
+    private readonly scheduleRepository: Repository<Schedule>
   ) {}
   public async save(company: Schedule): Promise<Schedule> {
     return await this.scheduleRepository.save(company);
   }
 
-  public async list(): Promise<Schedule[]> {
+  public async list(
+    onlyAvailableTime: boolean,
+    date: string,
+  ): Promise<Schedule[]> {
+    const whereCondition: any = {};
+    if (onlyAvailableTime) {
+      whereCondition.reserved = false;
+    }
+    if (date) {
+      whereCondition.date = date;
+    }
     return await this.scheduleRepository.find({
-      where: {
-        reserved: false,
-      },
+      where: whereCondition,
     });
   }
 

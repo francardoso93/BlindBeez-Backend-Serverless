@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, HttpCode, Post, Body, Put, Param, Delete, Query } from '@nestjs/common';
 import { Schedule } from './schedule.entity';
 import { ScheduleService } from './schedule.service';
 
@@ -19,8 +19,8 @@ export class ScheduleController {
 
     @Get()
     @HttpCode(200)
-    async list() {
-        return await this.scheduleService.list();
+    async list(@Query() params) {
+        return await this.scheduleService.list(params.onlyAvailableTime, params.date);
     }
 
     @Get(":id")
