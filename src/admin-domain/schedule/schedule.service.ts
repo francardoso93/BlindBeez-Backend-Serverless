@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Schedule } from "./schedule.entity";
 import { Repository, DeleteResult } from "typeorm";
+import { NewScheduleDto } from "./new-schedule.dto";
 
 @Injectable()
 export class ScheduleService {
@@ -9,8 +10,19 @@ export class ScheduleService {
     @InjectRepository(Schedule)
     private readonly scheduleRepository: Repository<Schedule>
   ) {}
-  public async save(company: Schedule): Promise<Schedule> {
-    return await this.scheduleRepository.save(company);
+
+  public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto){
+    let currentDate = newSchedule.initialDate;
+    let currentTime = newSchedule.initialTime;
+    
+    const schedule: Schedule = {
+time: currentTime + int
+    }
+
+  }
+
+  public async save(schedule: Schedule): Promise<Schedule> {
+    return await this.scheduleRepository.save(schedule);
   }
 
   public async list(
