@@ -15,9 +15,9 @@ export class ScheduleService {
     let currentDate = newSchedule.initialDate;
     let currentTime = newSchedule.initialTime;
     
-    const schedule: Schedule = {
-time: currentTime + int
-    }
+//     const schedule: Schedule = {
+// time: currentTime + int
+//     }
 
   }
 
@@ -28,7 +28,9 @@ time: currentTime + int
   public async list(
     onlyAvailableTime: boolean,
     date: string,
+    companyId: string
   ): Promise<Schedule[]> {
+
     const whereCondition: any = {};
     if (onlyAvailableTime) {
       whereCondition.reserved = false;
@@ -36,9 +38,12 @@ time: currentTime + int
     if (date) {
       whereCondition.date = date;
     }
-    return await this.scheduleRepository.find({
-      where: whereCondition,
-    });
+    if (companyId) {
+      whereCondition.company = {
+        id: companyId,
+      };
+    }
+    return await this.scheduleRepository.find(whereCondition);
   }
 
   public async get(id: string): Promise<Schedule> {

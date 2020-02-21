@@ -25,22 +25,22 @@ export class ScheduleController {
     @Get()
     @HttpCode(200)
     async list(@Query() params) {
-        return await this.scheduleService.list(params.onlyAvailableTime, params.date);
+        return await this.scheduleService.list(params.onlyAvailableTime, params.date, params.companyId);
     }
 
-    @Get(":id")
+    @Get(':id')
     @HttpCode(200)
     async get(@Param() params) {
         return await this.scheduleService.get(params.id);
     }
 
-    @Put(":id")
+    @Put(':id')
     @HttpCode(200)
     async put(@Param() params, @Body() body: Schedule) {
         return await this.scheduleService.update(params.id, body);
     }
 
-    @Delete(":id")
+    @Delete(':id')
     @HttpCode(200)
     async delete(@Param() params) {
         return await this.scheduleService.delete(params.id);
