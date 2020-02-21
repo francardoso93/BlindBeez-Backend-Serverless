@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
 import { Massotherapist } from '../massotherapists/massotherapist.entity';
 import { Company } from '../companies/company.entity';
 import { Client } from '../clients/client.entity';
@@ -19,7 +19,7 @@ export class Schedule {
     @JoinColumn()
     massotherapist: Massotherapist;
 
-    @OneToOne(type => Company)
+    @ManyToOne(type => Company)
     @JoinColumn()
     company: Company;
 

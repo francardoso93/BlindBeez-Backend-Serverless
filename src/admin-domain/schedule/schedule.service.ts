@@ -9,14 +9,16 @@ export class ScheduleService {
     @InjectRepository(Schedule)
     private readonly scheduleRepository: Repository<Schedule>
   ) {}
-  public async save(company: Schedule): Promise<Schedule> {
-    return await this.scheduleRepository.save(company);
+  public async save(schedule: Schedule): Promise<Schedule> {
+    return await this.scheduleRepository.save(schedule);
   }
 
   public async list(
     onlyAvailableTime: boolean,
     date: string,
+    companyId: string
   ): Promise<Schedule[]> {
+
     const whereCondition: any = {};
     if (onlyAvailableTime) {
       whereCondition.reserved = false;
@@ -24,9 +26,12 @@ export class ScheduleService {
     if (date) {
       whereCondition.date = date;
     }
-    return await this.scheduleRepository.find({
-      where: whereCondition,
-    });
+    if (companyId) {
+      whereCondition.company = {
+        id: companyId,
+      };
+    }
+    return await this.scheduleRepository.find(whereCondition);
   }
 
   public async get(id: string): Promise<Schedule> {
