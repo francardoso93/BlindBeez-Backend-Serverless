@@ -3,6 +3,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Schedule } from "./schedule.entity";
 import { Repository, DeleteResult } from "typeorm";
 import { NewScheduleDto } from "./new-schedule.dto";
+import { Moment } from "moment";
+import moment = require("moment");
 
 @Injectable()
 export class ScheduleService {
@@ -11,26 +13,33 @@ export class ScheduleService {
     private readonly scheduleRepository: Repository<Schedule>
   ) {}
 
-  public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto){
-    let currentDate = newSchedule.initialDate;
-    let currentTime = newSchedule.initialTime;
-    
-//     const schedule: Schedule = {
-// time: currentTime + int
-//     }
+  public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto) {
+    let currentMoment = new Date(newSchedule.initialDate);
+    const endDate = new Date(newSchedule.finalDate);
 
+    while (currentMoment < endDate) {
+      currentMoment = moment(currentMoment)
+        .add(newSchedule.minuteInterval, 'minutes')
+        .toDate();
+      const schedule: Schedule = {
+        company: newSchedule.company,
+        date: currentMoment,
+        reserved: false,
+      };
+      this.save(schedule);
+    }
   }
 
   public async save(schedule: Schedule): Promise<Schedule> {
     return await this.scheduleRepository.save(schedule);
   }
 
+  //TODO: Avaliar impacto da mudança do sistema para utilização do Date ao inves de string
   public async list(
     onlyAvailableTime: boolean,
     date: string,
     companyId: string
   ): Promise<Schedule[]> {
-
     const whereCondition: any = {};
     if (onlyAvailableTime) {
       whereCondition.reserved = false;
@@ -40,7 +49,7 @@ export class ScheduleService {
     }
     if (companyId) {
       whereCondition.company = {
-        id: companyId,
+        id: companyId
       };
     }
     return await this.scheduleRepository.find(whereCondition);
@@ -61,7 +70,6 @@ export class ScheduleService {
     existingSchedule.date = schedule.date;
     existingSchedule.massotherapist = schedule.massotherapist;
     existingSchedule.reserved = schedule.reserved;
-    existingSchedule.time = schedule.time;
     return await this.save(existingSchedule);
   }
 }

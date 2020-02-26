@@ -17,9 +17,7 @@ export class ScheduleController {
     @Post()
     @HttpCode(201)
     async post(@Body() body: NewScheduleDto) {
-        // if (body = await this.scheduleService.save(body)) {
-        //     return body;
-        // }
+        await this.scheduleService.BulkCreateAvailableSchedules(body);
     }
 
     @Get()

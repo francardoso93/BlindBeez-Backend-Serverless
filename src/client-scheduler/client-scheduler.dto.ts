@@ -5,7 +5,7 @@ export class ClientSchedulerDto {
     name: string;    
     email: string;    
     company: Company;    
-    date: string;    
+    date: Date;    
     massotherapist: Massotherapist;    
     time: string;
 }

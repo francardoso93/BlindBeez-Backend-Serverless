@@ -1,10 +1,8 @@
-import { Company } from "../companies/company.entity";
+import { Company } from '../companies/company.entity';
 
 export class NewScheduleDto {
     company: Company;
-    initialDate: string;
-    initialTime: string;
-    finalTime: string;
-    finalDate: string;
+    initialDate: Date;
+    finalDate: Date;
     minuteInterval: string;
 }

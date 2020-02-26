@@ -26,13 +26,12 @@ export class ClientSchedulerService {
             client = await this.clientRepository.save(client);
 
             var schedule: Schedule = {
-                id: 0,                
+                id: 0,
                 client: client,
                 company: clientScheduler.company,
                 date: clientScheduler.date,
                 massotherapist: clientScheduler.massotherapist,
                 reserved: true,
-                time: clientScheduler.time,
             }
             this.scheduleRepository.save(schedule);
 

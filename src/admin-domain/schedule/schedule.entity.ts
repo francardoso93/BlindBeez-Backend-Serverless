@@ -8,16 +8,12 @@ export class Schedule {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    //TODO: Reflexão: duas colunas separadas mesmo ou datetime? ****
     @Column()
-    date: string;
-
-    @Column()
-    time: string;
+    date: Date;
 
     @OneToOne(type => Massotherapist)
     @JoinColumn()
-    massotherapist: Massotherapist;
+    massotherapist?: Massotherapist;
 
     @ManyToOne(type => Company)
     @JoinColumn()
@@ -25,7 +21,7 @@ export class Schedule {
 
     @OneToOne(type => Client)
     @JoinColumn()
-    client: Client;
+    client?: Client;
 
     @Column()
     reserved: boolean;
