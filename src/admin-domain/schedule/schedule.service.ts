@@ -35,11 +35,11 @@ export class ScheduleService {
     return await this.scheduleRepository.save(schedule);
   }
 
-  //TODO: Avaliar impacto da mudança do sistema para utilização do Date ao inves de string
   public async list(
     onlyAvailableTime: boolean,
     date: string,
-    companyId: string
+    companyId: string,
+    splitTime: boolean,
   ): Promise<Schedule[]> {
 
     const whereCondition: any = {};
@@ -54,7 +54,15 @@ export class ScheduleService {
         id: companyId,
       };
     }
-    return await this.scheduleRepository.find(whereCondition);
+    // TODO: Ordenar por data
+    const scheduleList = await this.scheduleRepository.find(whereCondition);
+    if (splitTime) {
+      scheduleList.map(a => {
+        a.dateStr = moment(a.date).format('YYYY-MM-DD');
+        a.timeStr = moment(a.date).utc().format('HH:mm:ss');
+      });
+    }
+    return scheduleList;
   }
 
   public async get(id: string): Promise<Schedule> {

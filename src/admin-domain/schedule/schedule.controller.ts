@@ -23,7 +23,7 @@ export class ScheduleController {
     @Get()
     @HttpCode(200)
     async list(@Query() params) {
-        return await this.scheduleService.list(params.onlyAvailableTime, params.date, params.companyId);
+        return await this.scheduleService.list(params.onlyAvailableTime, params.date, params.companyId, params.splitTime);
     }
 
     @Get(':id')

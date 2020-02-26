@@ -1,28 +1,38 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne } from 'typeorm';
-import { Massotherapist } from '../massotherapists/massotherapist.entity';
-import { Company } from '../companies/company.entity';
-import { Client } from '../clients/client.entity';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne
+} from "typeorm";
+import { Massotherapist } from "../massotherapists/massotherapist.entity";
+import { Company } from "../companies/company.entity";
+import { Client } from "../clients/client.entity";
 
 @Entity()
 export class Schedule {
-    @PrimaryGeneratedColumn()
-    id?: number;
+  @PrimaryGeneratedColumn()
+  id?: number;
 
-    @Column()
-    date: Date;
+  @Column()
+  date: Date;
 
-    @OneToOne(type => Massotherapist)
-    @JoinColumn()
-    massotherapist?: Massotherapist;
+  dateStr?: string;
+  timeStr?: string;
 
-    @ManyToOne(type => Company)
-    @JoinColumn()
-    company: Company;
+  @OneToOne(type => Massotherapist)
+  @JoinColumn()
+  massotherapist?: Massotherapist;
 
-    @OneToOne(type => Client)
-    @JoinColumn()
-    client?: Client;
+  @ManyToOne(type => Company)
+  @JoinColumn()
+  company: Company;
 
-    @Column()
-    reserved: boolean;
+  @OneToOne(type => Client)
+  @JoinColumn()
+  client?: Client;
+
+  @Column()
+  reserved: boolean;
 }
