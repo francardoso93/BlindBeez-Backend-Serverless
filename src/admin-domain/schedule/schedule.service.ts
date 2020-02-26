@@ -1,10 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Schedule } from "./schedule.entity";
-import { Repository, DeleteResult } from "typeorm";
-import { NewScheduleDto } from "./new-schedule.dto";
-import { Moment } from "moment";
-import moment = require("moment");
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Schedule } from './schedule.entity';
+import { Repository, DeleteResult, Like, Raw, Between } from 'typeorm';
+import { NewScheduleDto } from './new-schedule.dto';
+import moment = require('moment');
 
 @Injectable()
 export class ScheduleService {
@@ -31,6 +30,8 @@ export class ScheduleService {
   }
 
   public async save(schedule: Schedule): Promise<Schedule> {
+    //TODO: Proteção para não criar agendas duplicadas: 
+    //https://stackoverflow.com/questions/46745688/typeorm-upsert-create-if-not-exist 
     return await this.scheduleRepository.save(schedule);
   }
 
@@ -40,16 +41,17 @@ export class ScheduleService {
     date: string,
     companyId: string
   ): Promise<Schedule[]> {
+
     const whereCondition: any = {};
     if (onlyAvailableTime) {
       whereCondition.reserved = false;
     }
     if (date) {
-      whereCondition.date = date;
+      whereCondition.date = Between (date + ' 00:00:00', date + ' 23:59:59');
     }
     if (companyId) {
       whereCondition.company = {
-        id: companyId
+        id: companyId,
       };
     }
     return await this.scheduleRepository.find(whereCondition);
