@@ -29,7 +29,7 @@ export class ClientSchedulerService {
                 id: 0,
                 client: client,
                 company: clientScheduler.company,
-                date: clientScheduler.date,
+                datetime: clientScheduler.date,
                 massotherapist: clientScheduler.massotherapist,
                 reserved: true,
             }

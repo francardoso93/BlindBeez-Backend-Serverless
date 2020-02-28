@@ -5,10 +5,10 @@ import {
   OneToOne,
   JoinColumn,
   ManyToOne
-} from "typeorm";
-import { Massotherapist } from "../massotherapists/massotherapist.entity";
-import { Company } from "../companies/company.entity";
-import { Client } from "../clients/client.entity";
+} from 'typeorm';
+import { Massotherapist } from '../massotherapists/massotherapist.entity';
+import { Company } from '../companies/company.entity';
+import { Client } from '../clients/client.entity';
 
 @Entity()
 export class Schedule {
@@ -16,10 +16,10 @@ export class Schedule {
   id?: number;
 
   @Column()
-  date: Date;
+  datetime: Date;
 
-  dateStr?: string;
-  timeStr?: string;
+  date?: string;
+  time?: string;
 
   @OneToOne(type => Massotherapist)
   @JoinColumn()

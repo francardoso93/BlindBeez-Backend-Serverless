@@ -10,7 +10,7 @@ export class ScheduleService {
   constructor(
     @InjectRepository(Schedule)
     private readonly scheduleRepository: Repository<Schedule>
-  ) {}
+  ) { }
 
   public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto) {
     let currentMoment = new Date(newSchedule.initialDate);
@@ -22,7 +22,7 @@ export class ScheduleService {
         .toDate();
       const schedule: Schedule = {
         company: newSchedule.company,
-        date: currentMoment,
+        datetime: currentMoment,
         reserved: false,
       };
       this.save(schedule);
@@ -47,19 +47,25 @@ export class ScheduleService {
       whereCondition.reserved = false;
     }
     if (date) {
-      whereCondition.date = Between (date + ' 00:00:00', date + ' 23:59:59');
+      // TODO: Está trazendo tudo com 3h de diferença (Timezone diferente)
+      whereCondition.datetime = Between(date + 'T00:00:00', date + 'T23:59:59');
     }
     if (companyId) {
       whereCondition.company = {
         id: companyId,
       };
     }
-    // TODO: Ordenar por data
-    const scheduleList = await this.scheduleRepository.find(whereCondition);
+    const scheduleList = await this.scheduleRepository.find(
+      {
+        where: [whereCondition],
+        order: {
+          datetime: 'ASC',
+        },
+      });
     if (splitTime) {
       scheduleList.map(a => {
-        a.dateStr = moment(a.date).format('YYYY-MM-DD');
-        a.timeStr = moment(a.date).utc().format('HH:mm:ss');
+        a.date = moment(a.datetime).utc().format('YYYY-MM-DD');
+        a.time = moment(a.datetime).utc().format('HH:mm:ss');
       });
     }
     return scheduleList;
@@ -77,7 +83,7 @@ export class ScheduleService {
     const existingSchedule = await this.get(id);
     existingSchedule.client = schedule.client;
     existingSchedule.company = schedule.company;
-    existingSchedule.date = schedule.date;
+    existingSchedule.datetime = schedule.datetime;
     existingSchedule.massotherapist = schedule.massotherapist;
     existingSchedule.reserved = schedule.reserved;
     return await this.save(existingSchedule);
