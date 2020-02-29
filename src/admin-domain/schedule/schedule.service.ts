@@ -20,7 +20,7 @@ export class ScheduleService {
     while (currentMoment < endDate) {
       currentMoment = moment(currentMoment)
         .add(newSchedule.minuteInterval, 'minutes')
-        .toDate();
+        .utc().utcOffset('-03:00').toDate();
       const schedule: Schedule = {
         company: newSchedule.company,
         datetime: currentMoment,
@@ -33,6 +33,7 @@ export class ScheduleService {
   public async save(schedule: Schedule): Promise<Schedule> {
     //TODO: Proteção para não criar agendas duplicadas: 
     //https://stackoverflow.com/questions/46745688/typeorm-upsert-create-if-not-exist 
+    // OU deletar todos os existentes (sem reserva) nesse periodo e substituir pelos novos. Alinhar com o Fê sobre essa funcionalidade
     return await this.scheduleRepository.save(schedule);
   }
 
@@ -50,7 +51,6 @@ export class ScheduleService {
       whereCondition.reserved = false;
     }
     if (date) {
-      // TODO: Está trazendo tudo com 3h de diferença (Timezone diferente)
       whereCondition.datetime = Between(date + 'T00:00:00', date + 'T23:59:59');
     }
     if (companyId) {
