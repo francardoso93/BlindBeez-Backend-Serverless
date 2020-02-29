@@ -4,6 +4,7 @@ import { Schedule } from './schedule.entity';
 import { Repository, DeleteResult, Like, Raw, Between } from 'typeorm';
 import { NewScheduleDto } from './new-schedule.dto';
 import moment = require('moment');
+import { ScheduleDto } from './schedule.dto';
 
 @Injectable()
 export class ScheduleService {
@@ -40,7 +41,9 @@ export class ScheduleService {
     date: string,
     companyId: string,
     splitTime: boolean,
-  ): Promise<Schedule[]> {
+  ): Promise<ScheduleDto[]> {
+
+    const scheduleDtoList: ScheduleDto[] = [];
 
     const whereCondition: any = {};
     if (onlyAvailableTime) {
@@ -62,13 +65,21 @@ export class ScheduleService {
           datetime: 'ASC',
         },
       });
-    if (splitTime) {
-      scheduleList.map(a => {
-        a.date = moment(a.datetime).utc().format('YYYY-MM-DD');
-        a.time = moment(a.datetime).utc().format('HH:mm:ss');
+
+    scheduleList.map(a => {
+      scheduleDtoList.push({
+        id: a.id,
+        company: a.company,
+        date: a.date = moment(a.datetime).utc().utcOffset('-03:00').format('YYYY-MM-DD'),
+        time: a.time = moment(a.datetime).utc().utcOffset('-03:00').format('HH:mm:ss'),
+        reserved: a.reserved,
+        client: a.client,
+        massotherapist: a.massotherapist,
       });
-    }
-    return scheduleList;
+
+    });
+
+    return scheduleDtoList;
   }
 
   public async get(id: string): Promise<Schedule> {

@@ -2,7 +2,7 @@ import { Massotherapist } from "../massotherapists/massotherapist.entity";
 import { Company } from "../companies/company.entity";
 import { Client } from "../clients/client.entity";
 
-export class scheduleDto {
+export class ScheduleDto {
     id?: number;
     date: string;
     time: string;
