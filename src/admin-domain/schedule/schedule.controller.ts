@@ -10,9 +10,7 @@ export class ScheduleController {
     ) { }
 
     // TODO: Pipe validação de entrada
-    //Usando POST para criação de novas agendas disponíveis. o PUT vai servir para trocar o status. 
-    //Ou seja, o formulário do front vai usar ou esse PUT ou o esquema do client-scheduler (Prefiro a primeira opção)
-    //O PUT também vai precisar sortear quem será o massoterapeuta disponível
+    //Ou seja, o formulário do front vai usar o esquema do client-scheduler
     //No endpoint de massoterapeutas vou precisar cadastrar as agendas deles para conseguir fazer esse cruzamento
     @Post()
     @HttpCode(201)
@@ -23,7 +21,7 @@ export class ScheduleController {
     @Get()
     @HttpCode(200)
     async list(@Query() params) {
-        return await this.scheduleService.list(params.onlyAvailableTime, params.date, params.companyId, params.splitTime);
+        return await this.scheduleService.list(params.onlyAvailableTime, params.date, params.companyId);
     }
 
     @Get(':id')

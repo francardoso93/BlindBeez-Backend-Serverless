@@ -18,19 +18,19 @@ export class ClientSchedulerService {
         // TODO: Transacionar?
         try {
             var client: Client = {
-                id: 0,
+                id: 0, //TODO: Buscar pelo email para verificar se já existe aquele cliente
                 name: clientScheduler.name,
                 email: clientScheduler.email,
                 company: clientScheduler.company,
             };
             client = await this.clientRepository.save(client);
 
+            // TODO: Entender como dizer ao 
             var schedule: Schedule = {
-                id: 0,
+                id: clientScheduler.id,
                 client: client,
-                company: clientScheduler.company,
-                datetime: clientScheduler.date,
-                massotherapist: clientScheduler.massotherapist,
+                // TODO: Sort Massotherapist
+                // massotherapist: clientScheduler.massotherapist,
                 reserved: true,
             }
             this.scheduleRepository.save(schedule);
@@ -42,10 +42,4 @@ export class ClientSchedulerService {
             throw ex;
         }
     }
-    // async findAll(): Promise<ClientScheduler[]> {
-    //     return this.clientRepository.find();
-    // }
-    // public async read(id: number): Promise<ClientScheduler> {
-    //     return this.clientRepository.findOne(id);
-    // }
 }

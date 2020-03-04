@@ -22,6 +22,7 @@ export class ScheduleService {
         .add(newSchedule.minuteInterval, 'minutes')
         .utc().utcOffset('-03:00').toDate();
       const schedule: Schedule = {
+        id: 0,
         company: newSchedule.company,
         datetime: currentMoment,
         reserved: false,
@@ -41,7 +42,6 @@ export class ScheduleService {
     onlyAvailableTime: boolean,
     date: string,
     companyId: string,
-    splitTime: boolean,
   ): Promise<ScheduleDto[]> {
 
     const scheduleDtoList: ScheduleDto[] = [];

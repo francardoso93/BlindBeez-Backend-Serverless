@@ -13,10 +13,10 @@ import { Client } from '../clients/client.entity';
 @Entity()
 export class Schedule {
   @PrimaryGeneratedColumn()
-  id?: number;
+  id: number;
 
   @Column()
-  datetime: Date;
+  datetime?: Date;
 
   date?: string;
   time?: string;
@@ -27,7 +27,7 @@ export class Schedule {
 
   @ManyToOne(type => Company)
   @JoinColumn()
-  company: Company;
+  company?: Company;
 
   @OneToOne(type => Client)
   @JoinColumn()
