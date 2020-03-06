@@ -5,6 +5,8 @@ import { Repository, DeleteResult, Like, Raw, Between } from 'typeorm';
 import { NewScheduleDto } from './new-schedule.dto';
 import moment = require('moment');
 import { ScheduleDto } from './schedule.dto';
+import { Moment } from 'moment';
+import { start } from 'repl';
 
 @Injectable()
 export class ScheduleService {
@@ -14,21 +16,33 @@ export class ScheduleService {
   ) { }
 
   public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto) {
+    let startDate = new Date(newSchedule.initialDate);
     let currentMoment = new Date(newSchedule.initialDate);
     const endDate = new Date(newSchedule.finalDate);
 
-    while (currentMoment < endDate) {
+    while (currentMoment < endDate) { //Day Increment
+      while (this.getTime(moment.utc(currentMoment)) < this.getTime(moment.utc(endDate))) { //Minute Increment
+        currentMoment = moment(currentMoment)
+          .add(newSchedule.minuteInterval, 'minutes')
+          .utc().utcOffset('-03:00').toDate();
+        const schedule: Schedule = {
+          id: 0,
+          company: newSchedule.company,
+          datetime: currentMoment,
+          reserved: false,
+        };
+        this.save(schedule);
+      }
       currentMoment = moment(currentMoment)
-        .add(newSchedule.minuteInterval, 'minutes')
+        .add(1, 'days')
+        .hours(startDate.getHours())
+        .minutes(startDate.getMinutes())
         .utc().utcOffset('-03:00').toDate();
-      const schedule: Schedule = {
-        id: 0,
-        company: newSchedule.company,
-        datetime: currentMoment,
-        reserved: false,
-      };
-      this.save(schedule);
     }
+  }
+
+  public getTime(dateTime: Moment): Moment {
+    return moment({ h: dateTime.hours(), m: dateTime.minutes() });
   }
 
   public async save(schedule: Schedule): Promise<Schedule> {
