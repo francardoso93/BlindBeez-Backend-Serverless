@@ -6,7 +6,6 @@ import { NewScheduleDto } from './new-schedule.dto';
 import moment = require('moment');
 import { ScheduleDto } from './schedule.dto';
 import { Moment } from 'moment';
-import { start } from 'repl';
 
 @Injectable()
 export class ScheduleService {
@@ -16,7 +15,7 @@ export class ScheduleService {
   ) { }
 
   public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto) {
-    let startDate = new Date(newSchedule.initialDate);
+    const startDate = new Date(newSchedule.initialDate);
     let currentMoment = new Date(newSchedule.initialDate);
     const endDate = new Date(newSchedule.finalDate);
 
@@ -65,7 +64,9 @@ export class ScheduleService {
       whereCondition.reserved = false;
     }
     if (date) {
-      whereCondition.datetime = Between(date + 'T00:00:00', date + 'T23:59:59');
+      whereCondition.datetime = Between(
+        moment(date, ['DD/MM/YYYY', 'YYYY-MM-DD']).format('YYYY-MM-DD') + 'T00:00:00',
+        moment(date, ['DD/MM/YYYY', 'YYYY-MM-DD']).format('YYYY-MM-DD') + 'T23:59:59');
     }
     if (companyId) {
       whereCondition.company = {

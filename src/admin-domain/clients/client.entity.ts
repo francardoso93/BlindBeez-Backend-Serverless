@@ -13,6 +13,6 @@ export class Client {
     email: string;
 
     @ManyToOne(type => Company, Company => Company.clients)
-    company: Company;
+    company?: Company;
 
 }

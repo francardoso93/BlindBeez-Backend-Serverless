@@ -7,8 +7,8 @@ export class Company {
     id: number;
 
     @Column()
-    name: string;
+    name?: string;
 
     @OneToMany(type => Client, Client => Client.company)
-    clients: Client[];
+    clients?: Client[];
 }
