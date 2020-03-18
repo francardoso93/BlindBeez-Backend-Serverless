@@ -29,7 +29,7 @@ export class Schedule {
   @JoinColumn()
   company?: Company;
 
-  @OneToOne(type => Client)
+  @ManyToOne(type => Client)
   @JoinColumn()
   client?: Client;
 
