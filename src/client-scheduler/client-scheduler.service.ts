@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { ClientSchedulerDto } from './client-scheduler.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Exclusion } from 'typeorm';
@@ -27,7 +27,7 @@ export class ClientSchedulerService {
 
             if (!client) {
                 client = {
-                    id: 0, //TODO: Buscar pelo email para verificar se já existe aquele cliente
+                    id: 0,
                     name: clientScheduler.name,
                     email: clientScheduler.email,
                     // company: {
@@ -37,15 +37,17 @@ export class ClientSchedulerService {
                 client = await this.clientRepository.save(client);
             }
 
-            const schedule: Schedule = await this.scheduleRepository.findOne(clientScheduler.id);
+            let schedule: Schedule = await this.scheduleRepository.findOne(clientScheduler.scheduleId);
             if (schedule) {
                 schedule.reserved = true;
                 schedule.client = client;
                 //TODO: schedule.massotherapist = // sort
-                this.scheduleRepository.save(schedule); //TODO: QueryFailedError: duplicate key value violates unique constraint "REL_3d81c1bcc9ffe860e54edf97dc" 
-                //Provavel que esse erro esteja ocorrendo ao tentar relacionar o mesmo cliente a varias agendas
-            }
-            else {
+                schedule = await this.scheduleRepository.save(schedule);
+                if (schedule.reserved === false || schedule.client == null) {
+                    throw new InternalServerErrorException('A reserva de horário não foi realizada corretamente');
+                }
+
+            } else {
                 throw new NotFoundException("Não foi possivel localizar a agenda informada")
             }
 
