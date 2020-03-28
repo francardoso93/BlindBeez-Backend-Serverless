@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "target": "es2017",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "rootDir": "./",
+    "baseUrl": "./",
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2017",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
   },
   "exclude": ["node_modules", "dist"]
 }

@@ -6,5 +6,5 @@ export class Massotherapist {
     id: number;
 
     @Column()
-    name: string;   
+    name: string;
 }

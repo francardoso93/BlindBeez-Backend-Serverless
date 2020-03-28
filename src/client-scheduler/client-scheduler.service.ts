@@ -41,14 +41,13 @@ export class ClientSchedulerService {
             if (schedule) {
                 schedule.reserved = true;
                 schedule.client = client;
-                //TODO: schedule.massotherapist = // sort
                 schedule = await this.scheduleRepository.save(schedule);
                 if (schedule.reserved === false || schedule.client == null) {
                     throw new InternalServerErrorException('A reserva de horário não foi realizada corretamente');
                 }
 
             } else {
-                throw new NotFoundException("Não foi possivel localizar a agenda informada")
+                throw new NotFoundException('Não foi possivel localizar a agenda informada')
             }
 
             return clientScheduler;
