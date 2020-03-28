@@ -6,7 +6,7 @@ plugins:
     - serverless-offline
 provider:
     name: aws
-    runtime: nodejs8.10
+    runtime: nodejs12.x
 functions:
     main:
         handler: src/lambda.handler

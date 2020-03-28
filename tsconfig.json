@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "preserveConstEnums": true,
-    "strictNullChecks": true,
     "sourceMap": true,
     "allowJs": true,
     "target": "es2017",
