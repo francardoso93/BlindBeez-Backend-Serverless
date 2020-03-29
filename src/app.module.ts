@@ -9,10 +9,21 @@ import { ContactModule } from './contact/contact.module';
 
 
 @Module({
-  imports: [ TypeOrmModule.forRoot(), ClientSchedulerModule, AdminDomainModule, ContactModule],
+  imports: [TypeOrmModule.forRoot({
+    "type": "postgres",
+    "host": "blindbeez.ctoukcg6wilz.us-east-1.rds.amazonaws.com",
+    "port": 5432,
+    "username": "postgres",
+    "password": "adminadmin",
+    "database": "blindbeez",
+    "entities": [
+      "dist/**/*.entity{.ts,.js}"
+    ],
+    "synchronize": true
+  }), ClientSchedulerModule, AdminDomainModule, ContactModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { 
-  constructor(private readonly connection: Connection) {}
+export class AppModule {
+  constructor(private readonly connection: Connection) { }
 }

@@ -6,7 +6,12 @@ plugins:
     - serverless-offline
 provider:
     name: aws
-    runtime: nodejs12.x
+    runtime: nodejs10.x
+    timeout: 10
+package:
+    individually: true
+    include:
+        - ormconfig.json
 functions:
     main:
         handler: src/lambda.handler

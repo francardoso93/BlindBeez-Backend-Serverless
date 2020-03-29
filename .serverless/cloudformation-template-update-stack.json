@@ -144,7 +144,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/blindbeez-backend-nest-serverless/dev/1585431371519-2020-03-28T21:36:11.519Z/blindbeez-backend-nest-serverless.zip"
+          "S3Key": "serverless/blindbeez-backend-nest-serverless/dev/1585511795406-2020-03-29T19:56:35.406Z/main.zip"
         },
         "FunctionName": "blindbeez-backend-nest-serverless-dev-main",
         "Handler": "_optimize/blindbeez-backend-nest-serverless-dev-main/src/lambda.handler",
@@ -155,7 +155,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs10.x",
         "Timeout": 6
       },
       "DependsOn": [
@@ -163,14 +163,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "MainLambdaVersionIdfi3egydBoQEL01WqG5FZqEXjn9EzncFpqP7vLTM": {
+    "MainLambdaVersion9tjn4mg16sZkjc5DEtthjRRtPaDqbKhOPJNojNIdk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "MainLambdaFunction"
         },
-        "CodeSha256": "ogXbU03L+CikO5sIHoiQmM2MHESocp2J9f3TSk9An74="
+        "CodeSha256": "1TH685rP97a0NZuYMGtWRq3BGwDnFh2r1/R5OvhUj5U="
       }
     },
     "ApiGatewayRestApi": {
@@ -243,7 +243,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1585431246517": {
+    "ApiGatewayDeployment1585511638030": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -302,7 +302,7 @@
     "MainLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "MainLambdaVersionIdfi3egydBoQEL01WqG5FZqEXjn9EzncFpqP7vLTM"
+        "Ref": "MainLambdaVersion9tjn4mg16sZkjc5DEtthjRRtPaDqbKhOPJNojNIdk"
       }
     },
     "ServiceEndpoint": {
