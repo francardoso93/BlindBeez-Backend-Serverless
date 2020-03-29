@@ -7,7 +7,7 @@ plugins:
 provider:
     name: aws
     runtime: nodejs10.x
-    timeout: 10
+    timeout: 40
 package:
     individually: true
     include:

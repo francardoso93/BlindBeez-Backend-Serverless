@@ -9,6 +9,7 @@
       "variableSyntax": "\\${([^{}]+?)}",
       "name": "aws",
       "runtime": "nodejs10.x",
+      "timeout": 10,
       "region": "us-east-1",
       "versionFunctions": true,
       "remoteFunctionData": null,
@@ -158,7 +159,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/blindbeez-backend-nest-serverless/dev/1585511795406-2020-03-29T19:56:35.406Z/main.zip"
+                "S3Key": "serverless/blindbeez-backend-nest-serverless/dev/1585514651361-2020-03-29T20:44:11.361Z/main.zip"
               },
               "FunctionName": "blindbeez-backend-nest-serverless-dev-main",
               "Handler": "_optimize/blindbeez-backend-nest-serverless-dev-main/src/lambda.handler",
@@ -170,14 +171,14 @@
                 ]
               },
               "Runtime": "nodejs10.x",
-              "Timeout": 6
+              "Timeout": 10
             },
             "DependsOn": [
               "MainLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "MainLambdaVersion9tjn4mg16sZkjc5DEtthjRRtPaDqbKhOPJNojNIdk": {
+          "MainLambdaVersion7anl7Fpmu9ziWgNsFQod2gdivlauWUupGPSktEY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -257,7 +258,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1585511638030": {
+          "ApiGatewayDeployment1585514394107": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -316,7 +317,7 @@
           "MainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MainLambdaVersion9tjn4mg16sZkjc5DEtthjRRtPaDqbKhOPJNojNIdk"
+              "Ref": "MainLambdaVersion7anl7Fpmu9ziWgNsFQod2gdivlauWUupGPSktEY"
             }
           },
           "ServiceEndpoint": {
@@ -442,10 +443,10 @@
           "artifact": "/home/francisco/projects/BlindBeez-Backend/.serverless/main.zip"
         },
         "memory": 1024,
-        "timeout": 6,
+        "timeout": 10,
         "runtime": "nodejs10.x",
         "vpc": {},
-        "versionLogicalId": "MainLambdaVersion9tjn4mg16sZkjc5DEtthjRRtPaDqbKhOPJNojNIdk"
+        "versionLogicalId": "MainLambdaVersion7anl7Fpmu9ziWgNsFQod2gdivlauWUupGPSktEY"
       }
     },
     "serviceFilename": "serverless.yaml",
@@ -454,7 +455,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/blindbeez-backend-nest-serverless/dev/1585511795406-2020-03-29T19:56:35.406Z",
+    "artifactDirectoryName": "serverless/blindbeez-backend-nest-serverless/dev/1585514651361-2020-03-29T20:44:11.361Z",
     "artifact": ""
   }
 }
