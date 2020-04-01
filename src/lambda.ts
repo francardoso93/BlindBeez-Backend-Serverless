@@ -33,6 +33,7 @@ binaryMimeTypes);
 
 // Export the handler : the entry point of the Lambda function
 export const handler: Handler = async (event: any, context: Context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
   cachedServer = await bootstrapServer();
   return proxy(cachedServer, event, context, 'PROMISE').promise;
 }
