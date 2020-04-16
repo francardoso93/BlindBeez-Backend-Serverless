@@ -26,7 +26,7 @@ steps:
 
 - task: CmdLine@2 #Generates Serverless zip file
   inputs:
-    script: 'sls package --package $(System.DefaultWorkingDirectory)/.serverless'
+    script: 'sls package --package $(System.DefaultWorkingDirectory)/.serverless --verbose'
 - task: CmdLine@2
   inputs:
     script: |
