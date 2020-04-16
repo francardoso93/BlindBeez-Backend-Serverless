@@ -30,6 +30,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
+      pwd
       ls
       cd ./.serverless
       ls/main.zip'
