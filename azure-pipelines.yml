@@ -42,4 +42,4 @@ steps:
     deploymentMode: 'codeonly'
     functionName: 'blindbeez-backend-nest-serverless-dev-main'
     codeLocation: 'localfile'
-    localZipFile: '/.serverless/main.zip'
+    localZipFile: '$(System.DefaultWorkingDirectory)/.serverless/*.zip'
