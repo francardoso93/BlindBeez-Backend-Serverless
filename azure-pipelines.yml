@@ -19,3 +19,20 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+- task: Npm@1 # Install serverless framework globally
+  inputs:
+    command: 'custom'
+    customCommand: 'i -g serverless'
+
+- task: CmdLine@2 #Generates Serverless zip file
+  inputs:
+    script: 'sls package'
+
+- task: LambdaDeployFunction@1
+  inputs:
+    awsCredentials: 'BlindBeez'
+    regionName: 'us-east-1'
+    deploymentMode: 'codeonly'
+    functionName: 'blindbeez-backend-nest-serverless-dev-main'
+    codeLocation: 'localfile'
+    localZipFile: '/.serverless/main.zip'
