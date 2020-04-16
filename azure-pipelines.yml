@@ -27,6 +27,12 @@ steps:
 - task: CmdLine@2 #Generates Serverless zip file
   inputs:
     script: 'sls package'
+- task: CmdLine@2
+  inputs:
+    script: |
+      ls
+      cd ./.serverless
+      ls/main.zip'
 
 - task: LambdaDeployFunction@1
   inputs:
