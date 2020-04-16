@@ -32,9 +32,6 @@ steps:
     script: |
       pwd
       ls -a
-      cd $(System.DefaultWorkingDirectory)/.serverless
-      ls'
-
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'BlindBeez'
