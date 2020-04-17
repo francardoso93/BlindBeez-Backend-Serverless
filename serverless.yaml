@@ -2,7 +2,6 @@ service:
     name: blindbeez-backend-nest-serverless
 plugins:
     - serverless-plugin-typescript
-    # - serverless-plugin-optimize
     - serverless-offline
 provider:
     name: aws

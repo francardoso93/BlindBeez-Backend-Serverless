@@ -10,7 +10,7 @@ export class ClientSchedulerController {
 
     // TODO: Pipe validação de entrada
     @Post()
-    @HttpCode(201)
+    @HttpCode(202)
     async post(@Body() body: ClientSchedulerDto) {
         // body = await this.clientSchedulerService.save(body);
         // if (body) {
