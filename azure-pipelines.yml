@@ -26,14 +26,8 @@ steps:
 
 - task: CmdLine@2 #Generates Serverless zip file
   inputs:
-    script: 'sls package --verbose'
-- task: CmdLine@2
-  inputs:
-    script: |
-      pwd
-      ls -a
-      cd .serverless
-      ls -a
+    script: 'sls package'
+
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'BlindBeez'
