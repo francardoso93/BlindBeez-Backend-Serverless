@@ -33,6 +33,7 @@ steps:
       pwd
       ls -a
       cd .serverless
+      ls -a
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'BlindBeez'
@@ -40,4 +41,4 @@ steps:
     deploymentMode: 'codeonly'
     functionName: 'blindbeez-backend-nest-serverless-dev-main'
     codeLocation: 'localfile'
-    localZipFile: '$(System.DefaultWorkingDirectory)/.serverless/*.zip'
+    localZipFile: '$.serverless/'
