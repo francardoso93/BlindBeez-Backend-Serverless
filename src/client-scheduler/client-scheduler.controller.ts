@@ -12,9 +12,9 @@ export class ClientSchedulerController {
     @Post()
     @HttpCode(202)
     async post(@Body() body: ClientSchedulerDto) {
-        // body = await this.clientSchedulerService.save(body);
-        // if (body) {
-        //     return body;
-        // }
+        body = await this.clientSchedulerService.save(body);
+        if (body) {
+            return body;
+        }
     }
 }
