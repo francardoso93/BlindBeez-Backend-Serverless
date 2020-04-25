@@ -33,6 +33,6 @@ steps:
     awsCredentials: 'BlindBeez'
     regionName: 'us-east-1'
     deploymentMode: 'codeonly'
-    functionName: 'blindbeez-backend-nest-serverless-dev-main'
+    functionName: 'blindbeez-backend-serverless-nest-dev-main'
     codeLocation: 'localfile'
     localZipFile: '.serverless/main.zip'
