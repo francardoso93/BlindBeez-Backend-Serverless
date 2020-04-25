@@ -1,0 +1,13 @@
+{
+    "type": "postgres",
+    "host": "blind.ctoukcg6wilz.us-east-1.rds.amazonaws.com",
+    "port": 5432,
+    "username": "postgres",
+    "password": "adminadmin",
+    "database": "blindbeez",
+    "entities": [
+        "dist/**/*.entity{.ts,.js}",
+        "**/*.entity{.ts,.js}"
+    ],
+    "synchronize": true
+}
