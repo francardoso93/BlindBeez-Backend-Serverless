@@ -1,12 +1,12 @@
 service:
-    name: blindbeez-backend-nest-serverless
+    name: blindbeez-backend-serverless-nest
 plugins:
     - serverless-plugin-typescript
     - serverless-offline
 provider:
     name: aws
     runtime: nodejs10.x
-    timeout: 40
+    timeout: 30
 package:
     individually: true
     include:
@@ -15,4 +15,8 @@ functions:
     main:
         handler: src/lambda.handler
         # events: [{http: {method: any, path: '/{any+}', cors: true}}]
-        events: [{http: {method: GET, path: '/companies', cors: true}}]
+        events: 
+            - http:
+                path: companies
+                method: get
+                cors: true 
