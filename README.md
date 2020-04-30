@@ -1,75 +1,80 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# serverless-nestJS-typeORM-crud
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
+##### This is example how to nestjs using the serverless framework
+  - TypeORM
+  - MySql
+  - CRUD
   
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+## setup mysql connection in serverless.yml
+```
+# Custom Variables
+custom:
+  ...
+  mysqlHost:
+    local: localhost
+  mysqlUser:
+    local: user
+  mysqlPassword:
+    local: password
+  mysqlDatabase:
+    local: dbname
+  mysqlPort:
+    local: '3306'
+```
+## How to prepare
+```
+$ npm install serverless -g
+$ git clone https://github.com/kop7/serverless-nestjs-typeorm.git 【projectName】
+$ cd 【projectName】
+$ npm install        
 ```
 
-## Running the app
+## Development
 
-```bash
-# development
-$ npm run start
+```
+$ npm run sls:offline 
+Serverless: Typescript compiled.
+Serverless: Watching typescript files...
+Serverless: Starting Offline: undefined/undefined.
 
-# watch mode
-$ npm run start:dev
+Serverless: Routes for author:
+Serverless: ANY /api/author
 
-# production mode
-$ npm run start:prod
+Serverless: Routes for book:
+Serverless: ANY /api/book
+
+Serverless: Offline listening on http://localhost:3000
 ```
 
-## Test
+The logs should be :
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```  
+Serverless: ANY /api/book (λ: book)
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [NestFactory] Starting Nest application...
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] TypeOrmModule dependencies initialized +34ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] AppModule dependencies initialized +43ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] ConfigModule dependencies initialized +5ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] TypeOrmCoreModule dependencies initialized +168ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] TypeOrmModule dependencies initialized +1ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] BookModule dependencies initialized +3ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [InstanceLoader] AuthorModule dependencies initialized +0ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RoutesResolver] AppController {/}: +10ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RoutesResolver] BookController {/api/book}: +1ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/, GET} route +6ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, GET} route +3ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/, POST} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/bulk, POST} route +4ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, PATCH} route +4ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, PUT} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, DELETE} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RoutesResolver] AuthorController {/api/author}: +1ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/, GET} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, GET} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/, POST} route +3ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/bulk, POST} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, PATCH} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, PUT} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [RouterExplorer] Mapped {/:id, DELETE} route +2ms
+[Nest] 7980   - 09/02/2019, 6:33:47 PM   [NestApplication] Nest application successfully started +6ms
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
