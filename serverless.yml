@@ -1,6 +1,5 @@
 service:
-  name: serverless-nestjs-crud
-
+  name: blindbeez-backend-serverless
 plugins:
   - "@hewmen/serverless-plugin-typescript"
   - serverless-offline
@@ -8,7 +7,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: ${opt:stage,'local'}
+  stage: ${opt:stage}
 
   # Environment Variables
   # environment:
@@ -56,16 +55,16 @@ functions:
     handler: src/lambda.handler
     events:
       - http:
-          method: any
+          method: get
           path: /companies
-          cors: true
+          # cors: true
       - http:
-          method: any
+          method: get
           path: /schedules
-          cors: true
+          # cors: true
       - http:
-          method: any
+          method: post
           path: /client-scheduler
-          cors: true
+          # cors: true
 
   
