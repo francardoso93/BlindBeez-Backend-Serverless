@@ -32,7 +32,7 @@ steps:
   inputs:
     script: |
       cd .serverless
-      ls -l/
+      ls -l
 
 - task: LambdaDeployFunction@1
   inputs:
