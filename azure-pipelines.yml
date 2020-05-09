@@ -40,4 +40,4 @@ steps:
     deploymentMode: 'codeonly'
     functionName: 'blindbeez-backend-serverless-aws-main'
     codeLocation: 'localfile'
-    localZipFile: 'main.zip'
+    localZipFile: '.serverless/main.zip'
