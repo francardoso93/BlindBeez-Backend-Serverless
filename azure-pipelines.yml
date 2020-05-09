@@ -31,8 +31,7 @@ steps:
 - task: CmdLine@2 #Check main size
   inputs:
     script: |
-      cd .serverless
-      ls -l
+      ls -l .serverless
 
 - task: LambdaDeployFunction@1
   inputs:
