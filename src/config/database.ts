@@ -13,38 +13,26 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
             await connectionManager.get('default').close();
         } else {
             //CLOUD
-            options = {
-                type: 'postgres',
-                host: "blind.ctoukcg6wilz.us-east-1.rds.amazonaws.com",
-                username: "postgres",
-                password: "adminadmin",
-                database: "blindbeez",
-                port: 5432,
-                entities: [__dirname + '/../**/**.entity{.ts,.js}'],
-                synchronize: true,
-            } as TypeOrmModuleOptions;
-            //LOCAL
             // options = {
             //     type: 'postgres',
-            //     host: "localhost",
+            //     host: "blind.ctoukcg6wilz.us-east-1.rds.amazonaws.com",
             //     username: "postgres",
-            //     password: "admin",
+            //     password: "adminadmin",
             //     database: "blindbeez",
             //     port: 5432,
             //     entities: [__dirname + '/../**/**.entity{.ts,.js}'],
             //     synchronize: true,
             // } as TypeOrmModuleOptions;
-            // TODO: Variaveis de ambiente resolvem a questão do DEV VS. PROD!!
-            // options = {
-            //     type: 'postgres',
-            //     host: process.env.MYSQL_HOST,
-            //     username: process.env.MYSQL_USER,
-            //     password: process.env.MYSQL_PASSWORD,
-            //     database: process.env.MYSQL_DATABASE,
-            //     port: parseInt(process.env.MYSQL_PORT, 10),
-            //     entities: [__dirname + '/../entity/**.entity{.ts,.js}'],
-            //     synchronize: true,
-            // } as TypeOrmModuleOptions;
+            options = {
+                type: 'postgres',
+                host: process.env.BLIND_PG_HOST,
+                username: process.env.BLIND_PG_USERNAME,
+                password: process.env.BLIND_PG_PASSWORD,
+                database: process.env.BLIND_PG_DATABASE,
+                port: parseInt(process.env.BLIND_PG_PORT, 10),
+                entities: [__dirname + '/../**/**.entity{.ts,.js}'],
+                synchronize: true,
+            } as TypeOrmModuleOptions;
         }
         return options;
     }

@@ -10,28 +10,33 @@ provider:
   stage: ${opt:stage}
 
   # Environment Variables
-  # environment:
-  #   MYSQL_HOST: ${self:custom.mysqlHost.${self:provider.stage}}
-  #   MYSQL_USER: ${self:custom.mysqlUser.${self:provider.stage}}
-  #   MYSQL_PASSWORD: ${self:custom.mysqlPassword.${self:provider.stage}}
-  #   MYSQL_DATABASE: ${self:custom.mysqlDatabase.${self:provider.stage}}
-  #   MYSQL_PORT: ${self:custom.mysqlPort.${self:provider.stage}}
+  environment:
+    BLIND_PG_HOST: ${self:custom.pgHost.${self:provider.stage}}
+    BLIND_PG_USERNAME: ${self:custom.pgUser.${self:provider.stage}}
+    BLIND_PG_PASSWORD: ${self:custom.pgPassword.${self:provider.stage}}
+    BLIND_PG_DATABASE: ${self:custom.pgDatabase.${self:provider.stage}}
+    BLIND_PG_PORT: ${self:custom.pgPort.${self:provider.stage}}
 
 # Custom Variables
-# custom:
-#   stages:
-#     - local
-#     - dev
-#   mysqlHost:
-#     local: localhost
-#   mysqlUser:
-#     local: user
-#   mysqlPassword:
-#     local: password
-#   mysqlDatabase:
-#     local: dbname
-#   mysqlPort:
-#     local: '3306'
+custom:
+  stages:
+    - local
+    - aws
+  pgHost:
+    local: localhost
+    aws: blind.ctoukcg6wilz.us-east-1.rds.amazonaws.com
+  pgUser:
+    local: postgres
+    aws: postgres
+  pgPassword:
+    local: admin
+    aws: adminadmin
+  pgDatabase:
+    local: blindbeez
+    aws: blindbeez
+  pgPort:
+    local: '5432'
+    aws: '5432'
 package:
   individually: true
 
