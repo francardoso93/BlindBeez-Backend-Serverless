@@ -33,11 +33,18 @@ steps:
     script: |
       ls -l .serverless
 
+- task: S3Upload@0
+  inputs:
+    BucketName: 'blindbeez-serverless-funct-base-zip'
+    File: '.serverless/main.zip'
+    Key: 'main.zip'
+
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'BlindBeez'
     regionName: 'us-east-1'
     deploymentMode: 'codeonly'
-    functionName: 'blindbeez-backend-serverless-aws-main'
-    codeLocation: 'localfile'
-    localZipFile: '.serverless/main.zip'
+    functionName: 'blindbeez-backend-serverless'
+    codeLocation: 's3object'
+    s3Bucket: 'blindbeez-serverless-funct-base-zip'
+    s3ObjectKey: 'main.zip'
