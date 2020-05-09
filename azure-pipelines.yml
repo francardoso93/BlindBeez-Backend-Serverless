@@ -26,13 +26,13 @@ steps:
 
 - task: CmdLine@2 #Generates Serverless zip file
   inputs:
-    script: 'sls package'
+    script: 'sls package --stage aws'
 
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'BlindBeez'
     regionName: 'us-east-1'
     deploymentMode: 'codeonly'
-    functionName: 'blindbeez-backend-serverless-nest-dev-main'
+    functionName: 'blindbeez-backend-serverless-aws-main'
     codeLocation: 'localfile'
     localZipFile: '.serverless/main.zip'
