@@ -47,7 +47,7 @@ steps:
     awsCredentials: 'BlindBeez'
     regionName: 'us-east-1'
     deploymentMode: 'codeonly'
-    functionName: 'blindbeez-backend-serverless'
+    functionName: 'blindbeez-backend-serverless-aws-main'
     codeLocation: 's3object'
     s3Bucket: 'blindbeez-serverless-funct-base-zip'
     s3ObjectKey: 'main.zip'
