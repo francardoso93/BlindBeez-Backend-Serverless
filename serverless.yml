@@ -7,7 +7,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: ${opt:stage}
+  stage: ${opt:stage, 'local'}
 
   # Environment Variables
   environment:
@@ -41,35 +41,27 @@ package:
   individually: true
 
 functions:
-  # author:
-  #   handler: src/lambda.handler
-  #   events:
-  #     - http:
-  #         method: any
-  #         path: /api/author
-  #         cors: true
-
-  # book:
-  #   handler: src/lambda.handler
-  #   events:
-  #     - http:
-  #         method: any
-  #         path: /api/book
-  #         cors: true
   main:
     handler: src/lambda.handler
+    vpc: 
+      securityGroupIds:
+        - sg-ca951997
+      subnetIds:
+        - subnet-f65770d8
+        - subnet-6b751955
+        - subnet-3e4c5e31
     events:
       - http:
           method: get
           path: /companies
-          # cors: true
       - http:
           method: get
           path: /schedules
-          # cors: true
+      - http:
+          method: post
+          path: /schedules
       - http:
           method: post
           path: /client-scheduler
-          # cors: true
 
   
