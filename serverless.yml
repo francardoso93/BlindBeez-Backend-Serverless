@@ -55,6 +55,9 @@ functions:
           method: get
           path: /companies
       - http:
+          method: post
+          path: /companies
+      - http:
           method: get
           path: /schedules
       - http:
