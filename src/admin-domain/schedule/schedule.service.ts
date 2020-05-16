@@ -6,6 +6,7 @@ import { NewScheduleDto } from './new-schedule.dto';
 import moment = require('moment');
 import { ScheduleDto } from './schedule.dto';
 import { Moment } from 'moment';
+import { CompaniesService } from '../companies/companies.service';
 
 @Injectable()
 export class ScheduleService {
