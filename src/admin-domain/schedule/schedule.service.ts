@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Schedule } from './schedule.entity';
 import { Repository, DeleteResult, Like, Raw, Between } from 'typeorm';
