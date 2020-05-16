@@ -11,10 +11,16 @@ import { Moment } from 'moment';
 export class ScheduleService {
   constructor(
     @InjectRepository(Schedule)
-    private readonly scheduleRepository: Repository<Schedule>
+    private readonly scheduleRepository: Repository<Schedule>,
+    private readonly companiesService: CompaniesService
   ) { }
 
   public async BulkCreateAvailableSchedules(newSchedule: NewScheduleDto) {
+    const company = await this.companiesService.get(newSchedule.company?.id?.toString());
+    if (!company) {
+      throw new BadRequestException('CompanyId is not registered, please register company before schedule');
+    }
+
     const startDate = new Date(newSchedule.initialDate);
     let currentMoment = new Date(newSchedule.initialDate);
     const endDate = new Date(newSchedule.finalDate);
