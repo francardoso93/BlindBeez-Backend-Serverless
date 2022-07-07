@@ -39,7 +39,7 @@
     "@nestjsx/crud-request": "^4.2.0",
     "@nestjsx/crud-typeorm": "^4.2.0",
     "aws-serverless-express": "^3.3.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.28",
     "pg": "^7.17.1",
     "postgres": "^1.0.1",
